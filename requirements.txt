@@ -1,0 +1,23 @@
+## langchain
+langchain
+langchain-core
+langchain_together 
+
+## env
+python-dotenv
+
+## FastAPI
+fastapi
+pydantic
+typing
+pydantic[email]
+
+## streamlit
+streamlit
+uvicorn
+constants
+plotly
+streamlit_option_menu
+streamlit_extras
+
+os
