@@ -366,7 +366,7 @@ summarize overall
     from langchain_together import ChatTogether
     model = ChatTogether(
         model="Qwen/Qwen3-235B-A22B-Instruct-2507-tput",
-        max_tokens=200,
+        max_tokens=250,
         together_api_key=api_key
     )
 
@@ -405,6 +405,7 @@ st.markdown(
     unsafe_allow_html=True,
 
 )
+
 
 
 
