@@ -352,6 +352,8 @@ If unrelated, reply: "I’m here to assist with queries about Prateek’s profes
 Problem-solving, critical thinking, communication, time management.  
 Interested in Software Development, Data Science, ML, System Design, AI Product Dev.
 
+== EXPERIENCE ==
+summarize overall
 
 """
 
@@ -364,7 +366,7 @@ Interested in Software Development, Data Science, ML, System Design, AI Product 
     from langchain_together import ChatTogether
     model = ChatTogether(
         model="openai/gpt-oss-120b",
-        max_tokens=100,
+        max_tokens=200,
         together_api_key=api_key
     )
 
@@ -403,6 +405,7 @@ st.markdown(
     unsafe_allow_html=True,
 
 )
+
 
 
 
