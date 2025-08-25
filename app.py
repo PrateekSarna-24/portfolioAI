@@ -365,7 +365,7 @@ summarize overall
     # Define model
     from langchain_together import ChatTogether
     model = ChatTogether(
-        model="openai/gpt-oss-120b",
+        model="Qwen/Qwen3-235B-A22B-Instruct-2507-tput",
         max_tokens=200,
         together_api_key=api_key
     )
@@ -405,6 +405,7 @@ st.markdown(
     unsafe_allow_html=True,
 
 )
+
 
 
 
