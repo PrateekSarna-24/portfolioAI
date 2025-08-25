@@ -356,7 +356,7 @@ Interested in Software Development, Data Science, ML, System Design, AI Product 
 """
 
     # Load secrets
-    # load_dotenv()
+    load_dotenv()
 
     api_key = st.secrets.get("TOGETHER_API_KEY", os.getenv("TOGETHER_API_KEY"))
 
@@ -401,4 +401,5 @@ st.markdown(
     </div>
     """,
     unsafe_allow_html=True,
+
 )
