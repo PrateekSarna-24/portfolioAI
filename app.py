@@ -191,7 +191,7 @@ elif selected == "Projects":
                 ("TensorFlow", "#FF6F00"),
                 ("Keras", "#D00000")
             ],
-            "link": "https://github.com/yourrepo"
+            "link": "https://github.com/PrateekSarna-24/Neural-Machine-Translation"
         },
         {
             "title": "InstaBot Automation",
@@ -201,7 +201,7 @@ elif selected == "Projects":
                 ("Selenium", "#43A047"),
                 ("API Integration", "#795548")
             ],
-            "link": "https://github.com/yourrepo"
+            "link": "https://github.com/PrateekSarna-24/InstaBot"
         },
         {
             "title": "Pneumonia Detection",
@@ -403,4 +403,5 @@ st.markdown(
     unsafe_allow_html=True,
 
 )
+
 
