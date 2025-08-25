@@ -363,7 +363,7 @@ Interested in Software Development, Data Science, ML, System Design, AI Product 
     # Define model
     from langchain_together import ChatTogether
     model = ChatTogether(
-        model="openai/gpt-oss-20b",
+        model="openai/gpt-oss-120b",
         max_tokens=100,
         together_api_key=api_key
     )
@@ -378,7 +378,7 @@ Interested in Software Development, Data Science, ML, System Design, AI Product 
             result = model.invoke(chat_history)
             return getattr(result, "content", str(result))
         except Exception as e:
-            return f"❌ API call failed: {e}"
+            return f"❌ API call failed: No more AI Tokens left :("
 
     st.title("🤖 AI Portfolio Chatbot")
     st.markdown("Ask me anything about **Prateek Sarna's** skills, projects, and experience!")
@@ -403,5 +403,6 @@ st.markdown(
     unsafe_allow_html=True,
 
 )
+
 
 
