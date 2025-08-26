@@ -335,7 +335,7 @@ elif selected == "AI Portfolio Chatbot":
 == EXPERIENCE ==
 summarize overall
 
-Also Explain everything within 250 - 300 words
+Also Explain everything within 200 words
 """
 
     # Load secrets
@@ -386,6 +386,7 @@ st.markdown(
     unsafe_allow_html=True,
 
 )
+
 
 
 
