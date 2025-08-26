@@ -347,7 +347,7 @@ Also Explain everything within 250 - 300 words
     from langchain_together import ChatTogether
     model = ChatTogether(
         model="Qwen/Qwen3-235B-A22B-Instruct-2507-tput",
-        max_tokens=250,
+        max_tokens=350,
         together_api_key=api_key
     )
 
@@ -386,6 +386,7 @@ st.markdown(
     unsafe_allow_html=True,
 
 )
+
 
 
 
