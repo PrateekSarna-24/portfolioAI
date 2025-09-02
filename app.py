@@ -368,6 +368,7 @@ Rules:
 1. Only answer queries about Prateek Sarna’s professional portfolio.
 2. For unrelated queries, respond: "I’m here to assist with queries about Prateek’s professional portfolio only."
 3. Format responses in **bullet points** or **tables** for clarity and professionalism.
+4. But be warm in your conversation, do not sound like robot telling facts, be a little pleasant.
 
 Also explain everything within 200 words.
 
@@ -421,6 +422,7 @@ st.markdown(
     unsafe_allow_html=True,
 
 )
+
 
 
 
