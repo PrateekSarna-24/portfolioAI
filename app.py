@@ -11,7 +11,7 @@ from PIL import Image
 from pydantic import BaseModel, EmailStr, Field, ValidationError, field_validator
 from streamlit_option_menu import option_menu
 
-from langchain.prompts import load_prompt
+# from langchain.prompts import load_prompt
 from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_together import ChatTogether
 from dotenv import load_dotenv
@@ -422,6 +422,7 @@ st.markdown(
     unsafe_allow_html=True,
 
 )
+
 
 
 
