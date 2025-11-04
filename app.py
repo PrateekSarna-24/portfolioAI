@@ -6,21 +6,17 @@ from datetime import date
 from pathlib import Path
 from typing import Annotated
 from urllib.parse import quote_plus
-import streamlit as st
-from PIL import Image
-from pydantic import BaseModel, EmailStr, Field, ValidationError, field_validator
-from streamlit_option_menu import option_menu
-
-# from langchain.prompts import load_prompt
-from langchain_core.messages import SystemMessage, HumanMessage
-from langchain_together import ChatTogether
-from dotenv import load_dotenv
-
-from langchain.prompts import PromptTemplate
-    
 import os
 
+from PIL import Image
+from pydantic import BaseModel, EmailStr, Field, ValidationError
+from streamlit_option_menu import option_menu
+
 from dotenv import load_dotenv
+
+# LangChain / ChatTogether imports
+from langchain_core.messages import SystemMessage, HumanMessage  # ensure this import path is correct for your version
+from langchain_together import ChatTogether
 
 # ========================= Page config & global CSS ========================= #
 st.set_page_config(
@@ -30,7 +26,6 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Lock sidebar open & hide default footer; circular avatar utility
 st.markdown(
     """
     <style>
@@ -44,7 +39,6 @@ st.markdown(
 )
 
 # ================================ Assets =================================== #
-# Embed avatar as base64 so the circular mask is perfect and consistent
 AVATAR_PATHS = ["prateek.jpg", "avatar.png"]
 avatar_b64 = None
 for p in AVATAR_PATHS:
@@ -53,7 +47,6 @@ for p in AVATAR_PATHS:
             avatar_b64 = base64.b64encode(f.read()).decode()
         break
 
-# Resume bytes (read if present)
 RESUME_PATH = Path("PRATEEK_SARNA_RESUME_2025.pdf")
 resume_pdf_bytes = RESUME_PATH.read_bytes() if RESUME_PATH.exists() else None
 
@@ -70,17 +63,14 @@ with st.sidebar:
     )
 
     if avatar_b64:
-        # st.markdown(
-        #     f"""
-        #     <div class='center'>
-        #         <img src='data:image/png;base64,{avatar_b64}' class='profile-pic' alt='Prateek Sarna'>
-        #     </div>
-        #     """,
-        #     unsafe_allow_html=True,
-        # )
-
-        pass
-    
+        st.markdown(
+            f"""
+            <div class='center'>
+                <img src='data:image/png;base64,{avatar_b64}' class='profile-pic' alt='Prateek Sarna'>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
     else:
         st.markdown("<div class='center' style='font-size:48px'>🧠</div>", unsafe_allow_html=True)
 
@@ -95,7 +85,7 @@ with st.sidebar:
             "Contact",
             "Resume",
         ],
-        icons=["house", "robot" ,"graph-up", "kanban", "briefcase", "envelope", "file-earmark-person"],
+        icons=["house", "robot", "graph-up", "kanban", "briefcase", "envelope", "file-earmark-person"],
         default_index=0,
         orientation="vertical",
     )
@@ -114,7 +104,6 @@ if selected == "Home":
                 """,
                 unsafe_allow_html=True,
             )
-            pass
         st.metric("CGPA", "8.16")
         st.metric("Projects", "15+")
         st.metric("DSA", "700+")
@@ -124,20 +113,20 @@ if selected == "Home":
         st.write(
             """
             I'm **Prateek Sarna**, a software developer focused on **DSA**, **ML/DL**, and **system design**. I build
-            **end‑to‑end platforms**: frontend (Streamlit/HTML), backend (**FastAPI**), reliable **REST APIs**, and
+            **end-to-end platforms**: frontend (Streamlit/HTML), backend (**FastAPI**), reliable **REST APIs**, and
             containerized deployments with **Docker**. I also orchestrate AI pipelines with **LangChain** where useful.
 
             **Engineering Stack**
             - **Languages**: C++, Python, Java, SQL, HTML/CSS/JS
-            - **AI/ML**: scikit‑learn, TensorFlow/Keras, CNN/RNN/Transformers, multimodal fusion, LangChain
-            - **Backend**: FastAPI, auth, rate‑limiting, logging, telemetry
+            - **AI/ML**: scikit-learn, TensorFlow/Keras, CNN/RNN/Transformers, multimodal fusion, LangChain
+            - **Backend**: FastAPI, auth, rate-limiting, logging, telemetry
             - **System Design**: microservices, caching, pagination, idempotency, retries, observability
             - **DevOps**: Docker, Git, CI/CD, Unix; reproducible builds & envs
             - **Data**: Pandas/NumPy, SQL, data validation, ETL
             """
         )
         st.info(
-            "Currently exploring: Full end‑to‑end development with **LangChain**, **FastAPI**, and **Docker** — building robust APIs, orchestration, and deployable AI services."
+            "Currently exploring: Full end-to-end development with **LangChain**, **FastAPI**, and **Docker** — building robust APIs, orchestration, and deployable AI services."
         )
 
 # ================================ Skills =================================== #
@@ -150,10 +139,10 @@ elif selected == "Skills":
         st.subheader("Programming")
         st.write("C++, Python, Java, SQL, HTML/CSS/JS")
         st.subheader("AI/ML/DL")
-        st.write("scikit‑learn, TensorFlow/Keras, CNN, RNN, Transformers, LangChain, vector DBs")
+        st.write("scikit-learn, TensorFlow/Keras, CNN, RNN, Transformers, LangChain, vector DBs")
     with cols[1]:
         st.subheader("Backend & APIs")
-        st.write("FastAPI, REST design, auth, rate‑limits, pagination, versioning, OpenAPI")
+        st.write("FastAPI, REST design, auth, rate-limits, pagination, versioning, OpenAPI")
         st.subheader("Data")
         st.write("Pandas, NumPy, SQL, ETL, validation")
     with cols[2]:
@@ -174,7 +163,7 @@ elif selected == "Projects":
     projects = [
         {
             "title": "Medical Summarizer (LangChain + FastAPI + Docker)",
-            "desc": "Built an <b>end-to-end AI application<b> for summarizing patient records using <b>LangChain<b>, deployed with <b>FastAPI<b> backend and containerized in <b>Docker<b>. This project highlights my ability to build production-ready AI pipelines.",
+            "desc": "Built an <b>end-to-end AI application</b> for summarizing patient records using <b>LangChain</b>, deployed with <b>FastAPI</b> backend and containerized in <b>Docker</b>. This project highlights my ability to build production-ready AI pipelines.",
             "tech": [
                 ("LangChain", "#FF9800"),
                 ("FastAPI", "#009688"),
@@ -185,7 +174,7 @@ elif selected == "Projects":
         },
         {
             "title": "Neural Machine Translation",
-            "desc": "Developed a <b>French-to-English NMT system<b> with an <b>encoder–decoder architecture<b> and <b>Bahdanau attention mechanism<b>. The model dynamically focuses on key input words during translation, improving fluency and handling longer sentences. Trained on French-English parallel datasets and evaluated with <b>BLEU scores<b>.",
+            "desc": "Developed a <b>French-to-English NMT system</b> with an <b>encoder–decoder architecture</b> and <b>Bahdanau attention mechanism</b>. The model dynamically focuses on key input words during translation, improving fluency and handling longer sentences. Trained on French-English parallel datasets and evaluated with <b>BLEU scores</b>.",
             "tech": [
                 ("Python", "#3572A5"),
                 ("TensorFlow", "#FF6F00"),
@@ -195,7 +184,7 @@ elif selected == "Projects":
         },
         {
             "title": "InstaBot Automation",
-            "desc": "An <b>Instagram automation tool<b> built with <b>Selenium<b>, capable of scraping data and automating user interactions (likes, comments, follows). Helped me explore <b>API limitations and automation techniques<b>.",
+            "desc": "An <b>Instagram automation tool</b> built with <b>Selenium</b>, capable of scraping data and automating user interactions (likes, comments, follows). Helped me explore <b>API limitations and automation techniques</b>.",
             "tech": [
                 ("Python", "#3572A5"),
                 ("Selenium", "#43A047"),
@@ -205,7 +194,7 @@ elif selected == "Projects":
         },
         {
             "title": "Pneumonia Detection",
-            "desc": "Designed a <b>deep learning CNN model<b> for detecting pneumonia from chest X-ray images. Preprocessed medical images, trained on labeled datasets, and achieved strong accuracy in classification. This project combines <b>computer vision<b> with <b>healthcare AI<b>.",
+            "desc": "Designed a <b>deep learning CNN model</b> for detecting pneumonia from chest X-ray images. Preprocessed medical images, trained on labeled datasets, and achieved strong accuracy in classification. This project combines <b>computer vision</b> with <b>healthcare AI</b>.",
             "tech": [
                 ("Python", "#3572A5"),
                 ("TensorFlow", "#FF6F00"),
@@ -224,7 +213,7 @@ elif selected == "Projects":
         with cols[idx % 2]:
             st.markdown(
                 f"""
-                <div style='background-color:#f2f2f7; padding:18px; border-radius:15px; 
+                <div style='background-color:#f2f2f7; padding:18px; border-radius:15px;
                 box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:20px;'>
                     <h3 style='margin-bottom:5px; color:#222;'>{proj["title"]}</h3>
                     <p style='font-size:0.9em; color:#444; line-height:1.4;'>{proj["desc"]}</p>
@@ -235,8 +224,6 @@ elif selected == "Projects":
                 """,
                 unsafe_allow_html=True
             )
-
-
 
 # =============================== Experience ================================ #
 elif selected == "Experience":
@@ -250,25 +237,18 @@ elif selected == "Experience":
     )
     st.markdown("---")
     st.subheader("Academic")
-    st.write("CSE Graduate • CGPA **8.16** • NPTEL: Top 1% (Discrete Math), Top 2% (P&S)")
+    st.write("CSE Graduate • CGPA **8.16** • NPTEL: Top 1% (Discrete Math), Top 2% (Probability & Statistics)")
 
 # ================================ Contact ================================== #
 elif selected == "Contact":
-    from typing import Optional
-    import urllib.parse
-
-    # ------------------ Pydantic Model ------------------
     class ContactForm(BaseModel):
         name: str = Field(..., min_length=2, max_length=50)
         email: EmailStr
         message: str = Field(..., min_length=2, max_length=500)
 
-    # ------------------ Streamlit UI ------------------
     st.set_page_config(page_title="Contact - Prateek Sarna", layout="centered")
     st.title("📬 Contact Me")
-
-    st.write("Fill in your details below, and when you click **Send**, "
-            "WhatsApp will open with your message ready to send to me.")
+    st.write("Fill in your details below, and when you click **Send**, WhatsApp will open with your message ready to send to me.")
 
     with st.form("contact_form"):
         name = st.text_input("Your Name")
@@ -278,39 +258,33 @@ elif selected == "Contact":
 
     if submitted:
         try:
-            # Validate input
             form = ContactForm(name=name, email=email, message=message)
-
-            # Prepare WhatsApp URL
             phone_number = "+919911400546"
-            encoded_msg = urllib.parse.quote(
-                f"Hello, my name is {form.name} ({form.email}).\n\n{form.message}"
-            )
+            encoded_msg = quote_plus(f"Hello, my name is {form.name} ({form.email}).\n\n{form.message}")
             whatsapp_url = f"https://wa.me/{phone_number}?text={encoded_msg}"
-
             st.success("Validation successful! Opening WhatsApp...")
             st.markdown(f"[Click here if WhatsApp doesn't open automatically]({whatsapp_url})", unsafe_allow_html=True)
             st.markdown(f"<meta http-equiv='refresh' content='0; url={whatsapp_url}'>", unsafe_allow_html=True)
-
         except ValidationError as e:
             st.error("Please correct the errors below:")
             for err in e.errors():
                 st.write(f"**{err['loc'][0]}**: {err['msg']}")
 
-
 # ================================= Resume ================================== #
 elif selected == "Resume":
     st.title("Resume & Downloads")
     st.write("Grab my latest resume/CV or request a tailored version for a specific role.")
+    if resume_pdf_bytes:
+        st.download_button(
+            label="Download Resume (PDF)",
+            data=resume_pdf_bytes,
+            file_name="Prateek_Sarna_Resume.pdf",
+            mime="application/pdf",
+        )
+    else:
+        st.write("🛈 Resume file not found.")
 
-    st.download_button(
-        label="Download Resume (PDF)",
-        data=resume_pdf_bytes,
-        file_name="Prateek_Sarna_Resume.pdf",
-        mime="application/pdf",
-    )
     st.caption("Resume")
-
     st.markdown("---")
     st.subheader("Quick Snapshot")
     st.write(
@@ -322,48 +296,20 @@ elif selected == "Resume":
     )
 
 # ================================== AI Portfolio Chatbot ====================
-
-
-# ---------------- STREAMLIT APP ----------------
 elif selected == "AI Portfolio Chatbot":
+    st.title("🤖 AI Portfolio Chatbot")
+    st.markdown("Ask me anything about **Prateek Sarna's** skills, projects, and experience!")
 
     # System prompt
     system_prompt = r"""
-
-You are an AI portfolio assistant for **Prateek Sarna**, B.E. CSE student (Chandigarh University, 2021–2025, CGPA 8.16).
+You are an AI portfolio assistant for Prateek Sarna, B.E. CSE student (Chandigarh University, 2021–2025, CGPA 8.16).
 
 Summary:
 - Skilled in software dev, data science, AI, and system design; 700+ DSA problems solved.
 - Research: Deep learning emotion recognition (98%+ accuracy, IEEE 2023).
 
 Projects (auto-explain when mentioned):
-
-1. **AI-Powered Interactive Portfolio (2025)** — Streamlit | FastAPI | LangChain | Docker
-   - Built end-to-end AI-powered portfolio with chatbot (LLaMA-3 70B via LangChain).
-   - Backend (FastAPI) + Frontend (Streamlit), containerized with Docker.
-   - Added features like resume downloads, WhatsApp contact form, responsive UI.
-
-2. **News AI Workflow Automation (2025)** — n8n | Web Scraping | Automation
-   - Automated pipeline fetching real-time news, summarizing via AI, and posting to social media (LinkedIn/Twitter).
-   - Connected multiple APIs (HTTP requests, text extraction, summarization, file generation).
-   - Delivered reusable workflow documentation for scalable automation.
-
-3. **Neural Machine Translation (2023)** — Deep Learning | Generative AI
-   - Designed French→English translation system with 85%+ accuracy.
-   - Used encoder-decoder with attention, BLEU score evaluation.
-
-4. **Insta Bot (2023)** — Selenium | Web Automation
-   - Automated Instagram workflows: scraping 10k+ comments, auto-like, auto-comment, profile insights.
-   - Supported story status fetching and follower count extraction.
-
-Skills:
-- Languages: C++, Python, SQL, Java
-- Competitive Programming: 700+ DSA problems solved (LeetCode, GFG, Code360)
-- Developer Tools: Unix, VSCode, Docker, Git
-- Frameworks: LangChain, n8n, FastAPI, Streamlit, Pydantic, Keras, TensorFlow, Scikit-Learn, SQLite
-- Areas of Interest: Software Development, Data Science, Machine Learning, AI Development
-- Soft Skills: Problem solving, Critical thinking, Communication, Time management
-
+...
 Rules:
 1. Only answer queries about Prateek Sarna’s professional portfolio.
 2. For unrelated queries, respond: "I’m here to assist with queries about Prateek’s professional portfolio only."
@@ -371,23 +317,16 @@ Rules:
 4. But be warm in your conversation, do not sound like robot telling facts, be a little pleasant.
 
 Also explain everything within 200 words.
-
 """
-
-    # Load secrets
-    # load_dotenv()
 
     api_key = st.secrets.get("TOGETHER_API_KEY", os.getenv("TOGETHER_API_KEY"))
 
-    # Define model
-    from langchain_together import ChatTogether
     model = ChatTogether(
         model="meta-llama/Llama-3.3-70B-Instruct-Turbo",
         max_tokens=350,
         together_api_key=api_key
     )
 
-    # Helper function to directly query model
     def invoke_query(user_query: str):
         chat_history = [
             SystemMessage(content=system_prompt),
@@ -397,18 +336,13 @@ Also explain everything within 200 words.
             result = model.invoke(chat_history)
             return getattr(result, "content", str(result))
         except Exception as e:
-            return f"❌ API call failed: No more AI Tokens left :("
+            return f"❌ API call failed: {e}"
 
-    st.title("🤖 AI Portfolio Chatbot")
-    st.markdown("Ask me anything about **Prateek Sarna's** skills, projects, and experience!")
-
-    user_input = st.text_input("Type your message...")
+    user_input = st.text_input("Type your message…")
 
     if st.button("Send") and user_input.strip():
         ai_response = invoke_query(user_input)
         st.markdown(f"**AI:** {ai_response}")
-
-
 
 # ================================= Footer ================================== #
 st.markdown(
@@ -420,17 +354,4 @@ st.markdown(
     </div>
     """,
     unsafe_allow_html=True,
-
 )
-
-
-
-
-
-
-
-
-
-
-
-
